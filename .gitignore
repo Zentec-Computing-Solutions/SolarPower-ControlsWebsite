@@ -1,0 +1,26 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Node modules (if using any build tools in future)
+node_modules/
+npm-debug.log
+
+# Build artifacts
+_site/
+.jekyll-cache/
+
+# Environment files
+.env
+.env.local
+
+# System files
+*.log
