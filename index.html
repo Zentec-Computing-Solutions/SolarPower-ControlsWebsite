@@ -6,17 +6,18 @@
         <title>SolarPower & Controls - Professional Solar Solutions</title>
         <link rel="stylesheet" href="styles.css" />
         <link rel="icon" type="image/png" href="LogoBlackBackground.png" />
+        <script src="https://forminit.com/sdk/v1/forminit.js"></script>
     </head>
     <body>
         <!-- Navigation -->
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
-                    <img
+                    <!--<img
                         src="LogoBlackBackground.png"
                         alt="SolarPower & Controls"
                         class="logo"
-                    />
+                    />-->
                     <span class="company-name">SOLAR POWER & CONTROLS</span>
                 </div>
                 <ul class="nav-menu">
@@ -161,7 +162,7 @@
                         <h3>Installation</h3>
                         <p>
                             Professional installation by certified technicians
-                            with years of industry experience
+                            with real world industry experience
                         </p>
                     </div>
                     <div class="service-card">
@@ -284,8 +285,6 @@
             </div>
         </section>
 
-        <!-- Video section removed — hero contains background video -->
-
         <!-- About Section -->
         <section id="about" class="about">
             <div class="container">
@@ -301,15 +300,15 @@
                         <ul class="about-list">
                             <li>
                                 <span class="checkmark">✓</span> Certified
-                                installers with 10+ years experience
+                                installers with years of experience
                             </li>
                             <li>
                                 <span class="checkmark">✓</span> Premium
                                 SolarEdge partnerships
                             </li>
                             <li>
-                                <span class="checkmark">✓</span> 24/7 monitoring
-                                and support
+                                <span class="checkmark">✓</span> Monitoring and
+                                support
                             </li>
                             <li>
                                 <span class="checkmark">✓</span> Competitive
@@ -317,7 +316,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="about-stats">
+                    <!--<div class="about-stats">
                         <div class="stat">
                             <h3>500+</h3>
                             <p>Systems Installed</p>
@@ -330,7 +329,7 @@
                             <h3>98%</h3>
                             <p>Satisfaction Rate</p>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
@@ -345,6 +344,7 @@
                             <div class="form-group">
                                 <input
                                     type="text"
+                                    name="fi-sender-fullName"
                                     placeholder="Your Name"
                                     required
                                 />
@@ -352,12 +352,14 @@
                             <div class="form-group">
                                 <input
                                     type="email"
+                                    name="fi-sender-email"
                                     placeholder="Your Email"
                                     required
                                 />
                             </div>
                             <div class="form-group">
                                 <textarea
+                                    name="fi-text-message"
                                     placeholder="Your Message"
                                     rows="5"
                                     required
@@ -365,25 +367,35 @@
                             </div>
                             <div class="form-group">
                                 <label for="attachment" class="sr-only"
-                                    >Attachment</label
+                                    >Upload a previous power account or
+                                    bill</label
                                 >
                                 <input
                                     type="file"
                                     id="attachment"
-                                    name="attachment"
-                                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                                    name="fi-file-attachment"
+                                    accept=".pdf"
                                 />
+                                <p class="form-help-text">
+                                    Upload a previous power account or bill so
+                                    we can review your current usage.
+                                </p>
                             </div>
                             <button type="submit" class="btn btn-primary">
                                 Send Message
                             </button>
+                            <p
+                                id="contactFormStatus"
+                                class="form-status"
+                                aria-live="polite"
+                            ></p>
                         </form>
                     </div>
                     <div class="contact-info">
                         <div class="info-item">
                             <h3>Contact Info</h3>
-                            <p>Email: info@solarpowercontrols.com</p>
-                            <p>Phone: (555) 123-4567</p>
+                            <p>Email: richard@spcedge.nz</p>
+                            <p>Phone: +64 022 170 9399</p>
                         </div>
                         <div class="info-item">
                             <h3>Service Hours</h3>
@@ -414,14 +426,6 @@
                             <li><a href="#products">Products</a></li>
                             <li><a href="#about">About</a></li>
                             <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Follow Us</h4>
-                        <ul>
-                            <li><a href="#">Facebook</a></li>
-                            <li><a href="#">LinkedIn</a></li>
-                            <li><a href="#">Instagram</a></li>
                         </ul>
                     </div>
                 </div>

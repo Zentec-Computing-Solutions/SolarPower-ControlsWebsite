@@ -55,13 +55,10 @@ document.querySelectorAll(".service-card, .product-card").forEach((card) => {
     observer.observe(card);
 });
 
-// Form submission handler
-// To make this work on GitHub Pages, configure a form endpoint such as
-// Formspree (https://formspree.io/) or Getform (https://getform.io/) and
-// provide the endpoint URL below. Both providers accept file uploads.
-const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/yourFormId"
-
 const contactForm = document.getElementById("contactForm");
+const contactFormStatus = document.getElementById("contactFormStatus");
+const forminit = typeof Forminit !== "undefined" ? new Forminit() : null;
+
 if (contactForm) {
     contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -69,60 +66,45 @@ if (contactForm) {
         const submitButton = contactForm.querySelector("button[type='submit']");
         const originalText = submitButton.textContent;
 
-        const name = contactForm
-            .querySelector('input[type="text"]')
-            .value.trim();
-        const email = contactForm
-            .querySelector('input[type="email"]')
-            .value.trim();
-        const message = contactForm.querySelector("textarea").value.trim();
-        const fileInput = contactForm.querySelector("#attachment");
-
-        if (!name || !email || !message) {
-            alert("Please fill in all required fields.");
-            return;
-        }
-
-        // Build FormData for POST
-        const fd = new FormData();
-        fd.append("name", name);
-        fd.append("email", email);
-        fd.append("message", message);
-        if (fileInput && fileInput.files.length > 0) {
-            fd.append("attachment", fileInput.files[0]);
-        }
-
-        if (!FORM_ENDPOINT) {
-            // No endpoint configured — show instructions and fallback to mailto
-            const mailtoBody = encodeURIComponent(
-                `Name: ${name}\nEmail: ${email}\n\n${message}`,
-            );
-            window.location.href = `mailto:info@solarpowercontrols.com?subject=Website%20Contact&body=${mailtoBody}`;
+        if (!forminit) {
+            alert("Forminit SDK failed to load. Please try again later.");
             return;
         }
 
         try {
             submitButton.disabled = true;
             submitButton.textContent = "Sending...";
+            if (contactFormStatus) {
+                contactFormStatus.textContent = "";
+            }
 
-            const resp = await fetch(FORM_ENDPOINT, {
-                method: "POST",
-                body: fd,
-            });
+            const { error, redirectUrl } = await forminit.submit(
+                "za2j4rh06a8",
+                new FormData(contactForm),
+            );
 
-            if (resp.ok) {
+            if (!error) {
                 submitButton.textContent = "Message Sent!";
+                if (contactFormStatus) {
+                    contactFormStatus.textContent =
+                        "Thanks, your message has been sent.";
+                }
                 contactForm.reset();
             } else {
-                console.error("Form submission error:", resp.statusText);
-                alert(
-                    "There was an error submitting the form. Please try again later.",
-                );
+                console.error("Forminit submission error:", error);
+                if (contactFormStatus) {
+                    contactFormStatus.textContent =
+                        error.message ||
+                        "There was an error submitting the form. Please try again later.";
+                }
                 submitButton.textContent = originalText;
             }
         } catch (err) {
-            console.error("Form submission failed", err);
-            alert("Submission failed. Please try again later.");
+            console.error("Forminit submission failed", err);
+            if (contactFormStatus) {
+                contactFormStatus.textContent =
+                    "Submission failed. Please try again later.";
+            }
             submitButton.textContent = originalText;
         } finally {
             setTimeout(() => {
